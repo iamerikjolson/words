@@ -1,7 +1,7 @@
 var fs = require('fs'),
     myArgs = require('optimist').argv;
 
-
+// test
 
 
 String.prototype.startsWith = function (prefix){
