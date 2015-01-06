@@ -1,6 +1,11 @@
 var fs = require('fs'),
     myArgs = require('optimist').argv;
 
+<<<<<<< HEAD
+=======
+// test
+
+>>>>>>> 781e7133162ad91c2db70b858c3f4428bed8f927
 
 String.prototype.startsWith = function (prefix){
     return this.indexOf(prefix) == 0;
