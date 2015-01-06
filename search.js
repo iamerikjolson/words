@@ -1,7 +1,5 @@
 var fs = require('fs'),
-    myArgs = require('optimist').argv;
-
-// test
+    args = require('optimist').argv;
 
 String.prototype.startsWith = function (prefix){
     return this.indexOf(prefix) == 0;
@@ -11,21 +9,24 @@ String.prototype.endsWith = function(suffix) {
     return this.indexOf(suffix, this.length - suffix.length) !== -1;
 };
 
-if ((myArgs.h)||(myArgs.help)) {
-    console.log('Input flags_TM:');
+if ((args.h)||(args.help)) {
+    console.log('One of the following flags is required:');
     console.log('-i Included in');
     console.log('-s Starts with');
     console.log('-e Ends with');
-    console.log('Ex: -s tele (to find words that start with "tele" ');
+    console.log();
+    console.log('Optional flags');
+    console.log('-m The max word length to consider. Words longer than this value will be ignored.');
+    console.log();
+    console.log('Example: node search.js -s tele (to find words that start with "tele" ');
     console.log('');
     process.exit(0);
 }
 
-if(!myArgs.i && !myArgs.s && !myArgs.e) {
-    console.log('Must use one of the following flags: -h -i -s -e');
+if(!args.i && !args.s && !args.e) {
+    console.log('Must use one of the following flags: -i -s -e');
     process.exit(0);
 }
-
 
 fs.readFile('/usr/share/dict/words', 'utf8', function (err, data) {
     if (err) {
@@ -35,23 +36,27 @@ fs.readFile('/usr/share/dict/words', 'utf8', function (err, data) {
     var words = data.toString().split('\n'),
         matches = 0,
         word,
-        MAX_LEN = 8;
+        MAX_LEN = args.m || Number.MAX_VALUE;
 
     for(var i in words) {
         word = words[i].toLowerCase();
 
-        if(myArgs.s) {
-            if(word.startsWith(myArgs.s.toLowerCase()) && word.length <= MAX_LEN) {
+        if(word.length > MAX_LEN) {
+            continue;
+        }
+
+        if(args.s) {
+            if(word.startsWith(args.s.toLowerCase())) {
                 matches++;
                 console.log(word);
             }
-        } else if (myArgs.e) {
-            if(word.endsWith(myArgs.e.toLowerCase()) && word.length <= MAX_LEN) {
+        } else if (args.e) {
+            if(word.endsWith(args.e.toLowerCase())) {
                 matches++;
                 console.log(word);
             }
         } else {
-            if(word.indexOf(myArgs.i.toLowerCase()) > -1 && word.length <= MAX_LEN) {
+            if(word.indexOf(args.i.toLowerCase()) > -1) {
                 matches++;
                 console.log(word);
             }
@@ -59,5 +64,4 @@ fs.readFile('/usr/share/dict/words', 'utf8', function (err, data) {
     }
 
     console.log('matches: ', matches);
-
 });
