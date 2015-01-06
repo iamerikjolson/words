@@ -13,7 +13,7 @@ String.prototype.endsWith = function(suffix) {
 };
 
 if ((myArgs.h)||(myArgs.help)) {
-    console.log('Input flags:');
+    console.log('Input flags_TM:');
     console.log('-i Included in');
     console.log('-s Starts with');
     console.log('-e Ends with');
