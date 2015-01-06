@@ -2,8 +2,6 @@ var fs = require('fs'),
     myArgs = require('optimist').argv;
 
 
-
-
 String.prototype.startsWith = function (prefix){
     return this.indexOf(prefix) == 0;
 };
