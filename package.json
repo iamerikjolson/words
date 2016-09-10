@@ -1,0 +1,23 @@
+{
+  "name": "words",
+  "version": "1.0.0",
+  "description": "Search the dictionary on Mac for words that start with, end with, or include other words or letters.",
+  "main": "search.js",
+  "dependencies": {
+    "optimist": "^0.6.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erikpmp/words.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/erikpmp/words/issues"
+  },
+  "homepage": "https://github.com/erikpmp/words#readme"
+}
